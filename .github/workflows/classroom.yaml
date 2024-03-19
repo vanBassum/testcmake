@@ -24,7 +24,7 @@ jobs:
     - name: Autograding Reporter
       uses: education/autograding-grading-reporter@v1
       env:
-        TESTING123_RESULTS: "${{ steps.run-autograding-tests.outcome }}"
+        TESTING123_RESULTS: "${{steps.testing123.outputs.result}}"
       with:
         runners: testing123
         
