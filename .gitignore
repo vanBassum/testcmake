@@ -1,2 +1,4 @@
 ﻿build
 .vs
+_deps
+CMakeFiles
