@@ -14,14 +14,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Configure and build project
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        cmake --build .
-    - name: Run tests
-      run: ctest --output-on-failure
+    - name: Configure, Build, and Test Project
+      uses: threeal/cmake-action@v1.3.0
+      with:
+        run-build: true
+        run-test: true
     - name: Autograding Reporter
       uses: education/autograding-grading-reporter@v1
       env:
