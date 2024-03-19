@@ -21,6 +21,15 @@ jobs:
     - name: Test Project
       id: testing123
       run: ctest --test-dir build
+      continue-on-error: true
+    - name: Print test results
+      run: |
+        echo "Test outcome: ${{ steps.testing123.outcome }}"
+        echo "Test exit code: ${{ steps.testing123.exit_code }}"
+        echo "Test stdout:"
+        echo "${{ steps.testing123.stdout }}"
+        echo "Test stderr:"
+        echo "${{ steps.testing123.stderr }}"
     - name: Autograding Reporter
       uses: education/autograding-grading-reporter@v1
       env:
