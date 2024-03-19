@@ -18,10 +18,19 @@ jobs:
       uses: threeal/cmake-action@v1.3.0
     - name: Build Project
       run: cmake --build build
-    - name: Test Project
+ #   - name: Test Project
+ #     id: testing123
+ #     run: ctest --test-dir build
+ #     continue-on-error: true
+    - name: testing123
       id: testing123
-      run: ctest --test-dir build
-      continue-on-error: true
+      uses: education/autograding-command-grader@v1
+      with:
+        test-name: testing123
+        setup-command: ''
+        command: ctest --test-dir build
+        timeout: 10
+        max-score: 5
     - name: Print test results
       run: |
         echo "Test outcome: ${{ steps.testing123.outcome }}"
