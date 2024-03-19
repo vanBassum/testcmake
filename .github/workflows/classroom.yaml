@@ -1,0 +1,32 @@
+name: Autograding Tests
+'on':
+- push
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: testing123
+      id: testing123
+      uses: education/autograding-command-grader@v1
+      with:
+        test-name: testing123
+        setup-command: ''
+        command: cmake test
+        timeout: 10
+        max-score: 5
+    - name: Autograding Reporter
+      uses: education/autograding-grading-reporter@v1
+      env:
+        TESTING123_RESULTS: "${{steps.testing123.outputs.result}}"
+      with:
+        runners: testing123
+        
