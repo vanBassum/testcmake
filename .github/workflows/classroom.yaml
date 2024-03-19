@@ -18,7 +18,7 @@ jobs:
       uses: threeal/cmake-action@v1.3.0
     - name: Build Project
       run: cmake --build build
-    - name: testing123
+    - name: Testing Project
       id: testing123
       uses: education/autograding-command-grader@v1
       with:
@@ -29,12 +29,7 @@ jobs:
         max-score: 5
     - name: Print test results
       run: |
-        echo "Test outcome: ${{ steps.testing123.outcome }}"
-        echo "Test exit code: ${{ steps.testing123.exit_code }}"
-        echo "Test stdout:"
-        echo "${{ steps.testing123.stdout }}"
-        echo "Test stderr:"
-        echo "${{ steps.testing123.stderr }}"
+        cat /home/runner/work/testcmake/testcmake/build/Testing/Temporary/LastTest.log
     - name: Autograding Reporter
       uses: education/autograding-grading-reporter@v1
       env:
