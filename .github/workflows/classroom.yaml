@@ -12,13 +12,21 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Configure, Build, and Test Project
+
+
+    - name: Checkout
+      uses: actions/checkout@v4.1.2
+
+    - name: Configure Project
       uses: threeal/cmake-action@v1.3.0
-      with:
-        run-build: true
-        run-test: true
+
+    - name: Build Project
+      run: cmake --build build
+
+    - name: Test Project
+      run: ctest --test-dir build
+
+      
     - name: Autograding Reporter
       uses: education/autograding-grading-reporter@v1
       env:
